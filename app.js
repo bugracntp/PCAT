@@ -1,5 +1,8 @@
+// Libraries
 const express = require('express');
+const ejs = require('ejs');
 const path = require('path');
+
 const app = express();
 const port = 3000;
 /*
@@ -10,19 +13,24 @@ const logger1 = (req, res, next) => {
 };
 */
 
+// TAMPLATE ENGINGE
+app.set('view engine', 'ejs');
+
 // MIDDLEWARES
 app.use(express.static('public'));
 
+// ROUTERS
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'temp/index.html'));
+  //res.sendFile(path.resolve(__dirname, 'temp/index.html'));
+  res.render('index');
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'temp/about.html'));
+  res.render('about');
 });
 
-app.get('/contact', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'temp/contact.html'));
+app.get('/addphoto', (req, res) => {
+  res.render('add_photo');
 });
 
 app.listen(port, () => {
